@@ -1,0 +1,23 @@
+spring:
+  main:
+    banner-mode: off
+
+management:
+  endpoints:
+    web:
+      base-path: "/management"
+      exposure:
+        include: info, health, metrics, loggers
+  statsd:
+    metrics:
+      export:
+        enabled: ${STATSD_ENABLED:true}
+        flavor: datadog
+        host: ${STATSD_HOST:172.17.0.1}
+        port: ${STATSD_PORT:8125}
+  metrics:
+    tags:
+      rs_source: ${SOURCE_NAME}
+      rs_service: ${SERVICE_NAME}
+      logicalenvironment: ${LOGICAL_ENVIRONMENT}
+      version: ${IMAGE_VERSION}
